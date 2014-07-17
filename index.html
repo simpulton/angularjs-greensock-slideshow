@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="website">
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS Slideshow</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body ng-controller="MainCtrl">
+    <img bg-image class="fullBg {{currentAnimation}}" ng-repeat="slide in slides"
+         ng-if="isCurrentSlideIndex($index)"
+         ng-src="{{slide.image}}">
+
+    <ul class="nav nav-pills">
+        <li ng-class="{'active':isCurrentAnimation('slide-left-animation')}"><a ng-click="setCurrentAnimation('slide-left-animation')">LEFT</a></li>
+        <li ng-class="{'active':isCurrentAnimation('slide-down-animation')}"><a ng-click="setCurrentAnimation('slide-down-animation')">DOWN</a></li>
+        <li ng-class="{'active':isCurrentAnimation('fade-in-animation')}"><a ng-click="setCurrentAnimation('fade-in-animation')">FADE</a></li>
+    </ul>
+
+    <script src="libs/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/TweenMax.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>

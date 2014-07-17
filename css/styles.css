@@ -1,0 +1,32 @@
+html{
+    height: 100%;
+}
+body {
+    overflow: hidden;
+    min-height: 100%;
+}
+
+.fullBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.nav {
+    position: absolute;
+    right: 35px;
+    top: 35px;
+    z-index: 110;
+    float: none;
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li {
+    cursor: pointer;
+}
+
+.nav a {
+    background-color: rgba(255, 255, 255, 0.50);
+}

@@ -40,17 +40,19 @@ app.controller('MainCtrl', function ($scope, $timeout) {
             });
         });
         queue.on('complete', function() {
-            $scope.slides = [
-                {image: 'images/image00.jpg', description: 'Image 00'},
-                {image: 'images/image01.jpg', description: 'Image 01'},
-                {image: 'images/image02.jpg', description: 'Image 02'},
-                {image: 'images/image03.jpg', description: 'Image 03'},
-                {image: 'images/image04.jpg', description: 'Image 04'}
-            ];
+            $scope.$apply(function(){
+                $scope.slides = [
+                    {image: 'images/image00.jpg', description: 'Image 00'},
+                    {image: 'images/image01.jpg', description: 'Image 01'},
+                    {image: 'images/image02.jpg', description: 'Image 02'},
+                    {image: 'images/image03.jpg', description: 'Image 03'},
+                    {image: 'images/image04.jpg', description: 'Image 04'}
+                ];
 
-            $scope.loaded = true;
+                $scope.loaded = true;
 
-            $timeout(nextSlide, INTERVAL);
+                $timeout(nextSlide, INTERVAL);
+            });
         });
     }
 

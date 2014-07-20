@@ -1,4 +1,4 @@
-var app = angular.module('website', ['ngAnimate']);
+var app = angular.module('website', ['ngAnimate', 'ui.bootstrap']);
 
 app.controller('MainCtrl', function ($scope, $timeout) {
     var INTERVAL = 3000;
@@ -24,14 +24,37 @@ app.controller('MainCtrl', function ($scope, $timeout) {
         return $scope.currentAnimation === animation;
     }
 
-    $scope.slides = [
-        {image: 'images/image00.jpg', description: 'Image 00'},
-        {image: 'images/image01.jpg', description: 'Image 01'},
-        {image: 'images/image02.jpg', description: 'Image 02'},
-        {image: 'images/image03.jpg', description: 'Image 03'},
-        {image: 'images/image04.jpg', description: 'Image 04'}
-    ];
+    function loadImages() {
+        var queue = new createjs.LoadQueue(true);
 
+        queue.loadManifest(
+            [{id:"image00", src:"./images/image00.jpg"},
+             {id:"image01", src:"./images/image01.jpg"},
+             {id:"image02", src:"./images/image02.jpg"},
+             {id:"image03", src:"./images/image03.jpg"},
+             {id:"image04", src:"./images/image04.jpg"}]
+        );
+        queue.on('progress', function(event) {
+            $scope.$apply(function() {
+                $scope.progress = event.progress * 100;
+            });
+        });
+        queue.on('complete', function() {
+            $scope.slides = [
+                {image: 'images/image00.jpg', description: 'Image 00'},
+                {image: 'images/image01.jpg', description: 'Image 01'},
+                {image: 'images/image02.jpg', description: 'Image 02'},
+                {image: 'images/image03.jpg', description: 'Image 03'},
+                {image: 'images/image04.jpg', description: 'Image 04'}
+            ];
+
+            $scope.loaded = true;
+
+            $timeout(nextSlide, INTERVAL);
+        });
+    }
+
+    $scope.loaded = false;
     $scope.currentIndex = 0;
     $scope.currentAnimation = 'slide-left-animation';
 
@@ -40,7 +63,7 @@ app.controller('MainCtrl', function ($scope, $timeout) {
     $scope.setCurrentAnimation = setCurrentAnimation;
     $scope.isCurrentAnimation = isCurrentAnimation;
 
-    $timeout(nextSlide, INTERVAL);
+    loadImages();   
 });
 
 app.animation('.slide-left-animation', function ($window) {

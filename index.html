@@ -9,12 +9,12 @@
 </head>
 
 <body ng-controller="MainCtrl">
-    <div class="col-xs-12">
+    <div class="col-xs-12" ng-if="progress !== 100">
         <progressbar class="progress-striped" value="progress">{{progress | number:0}}%</progressbar>
     </div>
     <img ng-show="loaded" bg-image class="fullBg {{currentAnimation}}" ng-repeat="slide in slides"
          ng-if="isCurrentSlideIndex($index)"
-         ng-src="{{slide.image}}">
+         ng-src="{{slide.src}}">
 
     <ul ng-show="loaded" class="nav nav-pills">
         <li ng-class="{'active':isCurrentAnimation('slide-left-animation')}"><a ng-click="setCurrentAnimation('slide-left-animation')">LEFT</a></li>
@@ -23,7 +23,7 @@
     </ul>
 
     <script src="libs/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/TweenMax.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.1/TweenMax.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
     <script src="libs/ui-bootstrap-tpls-0.11.0.min.js"></script>
